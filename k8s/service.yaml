@@ -10,5 +10,5 @@ spec:
     - name: gateway
       protocol: TCP
       port: 8072
-      targetPort: gateway
+      targetPort: 8072
   type: LoadBalancer
