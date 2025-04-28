@@ -6,10 +6,21 @@ spring:
     name: ${SPRING_APP_NAME:gateway-service}
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: globalCircuitBreaker
+            fallbackUri: forward:/fallback
+      httpclient:
+        connect-timeout: 2000
+        response-timeout: 3s
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    urls-primary-name: auth-service
 
 logging:
   pattern:
@@ -34,4 +45,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      default-zone: ${EUREKA_SERVICE_URL:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_SERVICE_URL:http://eureka-naming-server:8761/eureka}
