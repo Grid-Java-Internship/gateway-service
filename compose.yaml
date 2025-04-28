@@ -6,8 +6,6 @@ services:
     ports:
       - "8072:8072"
     container_name: gateway-service
-    environment:
-      - EUREKA_SERVICE_URL=http://eureka-naming-server:8761/eureka
     networks:
       - global-network
 

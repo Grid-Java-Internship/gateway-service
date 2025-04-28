@@ -45,4 +45,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_SERVICE_URL}
+      defaultZone: ${EUREKA_SERVICE_URL:http://eureka-naming-server:8761/eureka}
