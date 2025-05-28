@@ -13,7 +13,28 @@ spring:
             fallbackUri: forward:/fallback
       httpclient:
         connect-timeout: 2000
-        response-timeout: 3s
+        response-timeout: 5s
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 100
+        failureRateThreshold: 50
+        slowCallRateThreshold: 70
+        slowCallDurationThreshold: 5000
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 10000
+      globalCircuitBreakerConfig:
+        slidingWindowSize: 50
+        failureRateThreshold: 60
+        slowCallRateThreshold: 80
+        slowCallDurationThreshold: 4500
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 15000
+    instances:
+      globalCircuitBreaker:
+        baseConfig: globalCircuitBreakerConfig
 
 springdoc:
   api-docs:
